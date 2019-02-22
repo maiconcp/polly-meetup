@@ -7,25 +7,42 @@ namespace ConsoleClient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Polly Client Started...");
+            Console.WriteLine("   * . * . * . * . * Polly Client Started * . * . * . * . * ");
 
+            // Art from: https://manytools.org/hacker-tools/convert-images-to-ascii-art/
+            Console.Write(
+@"                                                 ,****.    
+                                             ,,,,,******   
+                                 (####%(,  .,,,,,,*******  
+              (                *((#         ,,,,,,******** 
+             .((               (((           ,,,,,********,
+     (*      */((            . ((.   /////   .,,,,********.
+     #((     ./(((/          /. ((   /@@ *,  ,,*,        . 
+     #((((    //((((          (  (#   *@(.  .,.            
+     ##(((((  *//((((#/        ((*         .,,,,,          
+      ##((((((.///((#####/         .%%#   #( ,,,,.         
+      ###(((((((((((##########      ,%%  .,                
+       ####(((((((((((##########%%%%%%%%%%                 
+        ##%%#(((((((((((((((((((((((((((%%                 
+ ((      .#%%%%((((((((((((((((((((((((%%%                 
+ .(((((    ,%%%%%%%#((((((((((((((((((%%%                  
+  ((((((((((* %%%%%%%%%%%%#(((((((((#%%%                   
+   *(((((((((((((((((((((((((((((((%%%%                    
+     (((((((((((((((((((((((((((%%%%%%                     
+       ######(((((((((((((((%%%%%%%%                       
+         ###########%%%%%%%%%%%%%(                         
+            *######%%%%%%%%%%%                             
+                          /%%                              
+         %%%%%% (((((( %% %%%  *** **                      
+         %%% %% (( ((( %% %%%  *** **                      
+         %%%%%% (( ((( %% %%%  *** **                      
+         %%%    (((((( %% %%%  ******                      
+         %%%    (((((( %%  %%%%  ****                      
+                       %%%%%%% ******                      ");
+            Console.WriteLine();
             new PollyConsole().Run();           
 
             Console.ReadLine();
         }
-
-
-    }
-
-    public class PolicyTest
-    {
-        public PolicyTest(string policyName, Action action)
-        {
-            PolicyName = policyName;
-            Action = action;
-        }
-
-        public string PolicyName { get; private set; }
-        public Action Action { get; private set; }
     }
 }

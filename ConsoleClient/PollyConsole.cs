@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ConsoleClient.Common;
+using ConsoleClient.Policies;
 
 namespace ConsoleClient
 {

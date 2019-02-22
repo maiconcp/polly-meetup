@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ConsoleClient.Services;
 
-namespace ConsoleClient
+namespace ConsoleClient.Policies
 {
     public class WithoutPolicy
     {

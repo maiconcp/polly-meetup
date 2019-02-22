@@ -1,28 +1,29 @@
-﻿using Polly;
+﻿using ConsoleClient.Services;
+using Polly;
 using Polly.CircuitBreaker;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ConsoleClient
+namespace ConsoleClient.Policies
 {
     public class PollyCircuitBreak
     {
-        private CircuitBreakerPolicy Policy = Polly.Policy
-                                      .Handle<Exception>()
-                                      .CircuitBreaker(2, TimeSpan.FromSeconds(10),
-                                      onBreak: (exception, timespan) =>
-                                      {
-                                          Console.WriteLine($"> break, will open in {timespan.TotalSeconds}s");
-                                      },
-                                      onReset: () =>
-                                      {
-                                          Console.WriteLine("> reset...");
-                                      },
-                                      onHalfOpen: () =>
-                                      {
-                                          Console.WriteLine("> in HalfOpen");
-                                      });
+        public CircuitBreakerPolicy CircuitBreakerPolicy => Policy
+            .Handle<Exception>()
+            .CircuitBreaker(2, TimeSpan.FromSeconds(10),
+            onBreak: (exception, timespan) =>
+            {
+                Console.WriteLine($"> break, will open in {timespan.TotalSeconds}s");
+            },
+            onReset: () =>
+            {
+                Console.WriteLine("> reset...");
+            },
+            onHalfOpen: () =>
+            {
+                Console.WriteLine("> in HalfOpen");
+            });
 
 
 
@@ -43,7 +44,7 @@ namespace ConsoleClient
                 {
                     try
                     {
-                        Policy.Execute(() =>
+                        CircuitBreakerPolicy.Execute(() =>
                         {
                             ColoredConsole.WriteBlue("> Calling WebService...");
                             var result = new ClientService().GetSomeThing();
@@ -57,7 +58,7 @@ namespace ConsoleClient
 
                     Console.WriteLine();
                 }
-                Console.WriteLine($"> Circuit Break State: {Policy.CircuitState}");
+                Console.WriteLine($"> Circuit Break State: {CircuitBreakerPolicy.CircuitState}");
             }
             while (option != "E");
         }

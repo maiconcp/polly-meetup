@@ -1,4 +1,5 @@
-﻿using Polly;
+﻿using ConsoleClient.Services;
+using Polly;
 using Polly.Retry;
 using System;
 using System.Collections.Generic;
@@ -8,14 +9,14 @@ namespace ConsoleClient
 {
     public class PollyRetry
     {
-        public RetryPolicy RetryPolicy = Policy
+        public RetryPolicy RetryPolicy => Policy
             .Handle<Exception>()
             .Retry(3, onRetry: (e, retryAttempt) =>
             {
                 Console.WriteLine($"> Retry Attempt {retryAttempt}");
             });
 
-        public RetryPolicy WaitAndRetryPolicy = Policy
+        public RetryPolicy WaitAndRetryPolicy => Policy
               .Handle<Exception>()
               .WaitAndRetry(3, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
               onRetry: (exception, timespan, retryAttempt, context) =>
