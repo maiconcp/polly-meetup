@@ -1,0 +1,13 @@
+﻿@page
+@model ConfigureModel
+@{
+    ViewData["Title"] = "Contact";
+}
+<h2>@ViewData["Title"]</h2>
+
+<div asp-validation-summary="All"></div>
+<form method="POST">
+    <div>Enabled: <input asp-for="Enabled" /></div>
+    <div>Timeout: <input asp-for="Timeout" /></div>
+    <input type="submit" title="Save" />
+</form>

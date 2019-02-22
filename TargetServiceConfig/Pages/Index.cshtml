@@ -1,0 +1,41 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Server Status";
+}
+<h2>@ViewData["Title"]</h2>
+
+<span class="dot @(Model.Enabled ? "green" : "red")"></span>&nbsp;&nbsp;
+Current Timeout: @Model.Timeout s
+<br />
+<a asp-page-handler="On" asp-route-timeout="0">[ On ]</a>&nbsp;&nbsp;
+<a asp-page-handler="On" asp-route-timeout="1000">[ On with 1s timeout ]</a>&nbsp;&nbsp;
+<a asp-page-handler="On" asp-route-timeout="3000">[ On with 3s timeout ]</a>&nbsp;&nbsp;
+<a asp-page-handler="On" asp-route-timeout="5000">[ On with 5s timeout ]</a>&nbsp;&nbsp;
+<a asp-page-handler="On" asp-route-timeout="8000">[ On with 8s timeout ]</a>&nbsp;&nbsp;
+<br />
+<a asp-page-handler="Off" asp-route-timeout="0">[ Off ]</a>&nbsp;&nbsp;
+<a asp-page-handler="Off" asp-route-timeout="1000">[ Off with 1s timeout ]</a>&nbsp;&nbsp;
+<a asp-page-handler="Off" asp-route-timeout="3000">[ Off with 3s timeout ]</a>&nbsp;&nbsp;
+<a asp-page-handler="Off" asp-route-timeout="5000">[ Off with 5s timeout ]</a>&nbsp;&nbsp;
+<a asp-page-handler="Off" asp-route-timeout="8000">[ Off with 8s timeout ]</a>&nbsp;&nbsp;
+<br />
+<a asp-page-handler="Clear">[ Clear Log ]</a>&nbsp;&nbsp;
+<span style="white-space: pre-line">
+    <code>
+        @Model.Log
+    </code>
+</span>
+
+@*@section metadata {
+        <meta http-equiv="refresh" content="1; URL=http://localhost:5000/">
+    }*@
+
+@section Scripts
+    {
+    <script type="text/javascript">
+        setTimeout(function () {
+            window.location.href = "http://localhost:5000/";
+        }, 500);
+    </script>
+}
