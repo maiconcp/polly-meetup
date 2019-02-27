@@ -27,9 +27,9 @@ namespace TargetServiceConfig.Controllers
             if (!Device.Instance.Enabled)
             {
                 _logger.Add("Server is down");
-                return BadRequest(new BusinessData() { Result = false });
+                return BadRequest(new BusinessData(result: false));
             }
-            return Ok(new BusinessData() { Result = true });
+            return Ok(new BusinessData(result: true));
         }
 
         private void Waiting()
@@ -45,6 +45,13 @@ namespace TargetServiceConfig.Controllers
 
     public class BusinessData
     {
-        public bool Result { get; set; }
+        public BusinessData(bool result)
+        {
+            Result = result;
+            When = DateTime.Now;
+        }
+
+        public bool Result { get; private set; }
+        public DateTime When { get; private set; }
     }
 }

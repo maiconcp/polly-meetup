@@ -14,14 +14,22 @@ namespace ConsoleClient
             var retry = new PollyRetry();
             var circuitBreak = new PollyCircuitBreak();
             var retryCircuitBreak = new PollyRetryAndCircuitBreak();
+            var cache = new PollyCache();
+            var fallback = new PollyFallback();
+            var timeout = new PollyTimeout();
+            var bulkhead = new PollyBulkhead();
 
             Policies = new Dictionary<string, PolicyTest>()
             {
                 { "1" , new PolicyTest("Without Policy", () => new WithoutPolicy().Run()) },
                 { "2" , new PolicyTest("Retry", () => retry.Retry()) },
-                { "3" , new PolicyTest("WaitAndRetryExponential", () => retry.WaitAndRetryExponential()) },
-                { "4", new PolicyTest("CircuitBreak", () => circuitBreak.CircuitBreak()) },
-                { "5", new PolicyTest("RetryCircuitBreak", () => retryCircuitBreak.CircuitBreak()) }
+                { "3" , new PolicyTest("Wait And Retry Exponential", () => retry.WaitAndRetryExponential()) },
+                { "4", new PolicyTest("Circuit Breaker", () => circuitBreak.CircuitBreak()) },
+                { "5", new PolicyTest("Retry + Circuit Breaker", () => retryCircuitBreak.RetryAndCircuitBreak()) },
+                { "6", new PolicyTest("Cache", () => cache.Cache()) },
+                { "7", new PolicyTest("Fallback", () => fallback.Fallback()) },
+                { "8", new PolicyTest("Timeout", () => timeout.Timeout()) },
+                { "9", new PolicyTest("Bulkhead Isolation", () => bulkhead.Bulkhead()) },
             };
         }
 
@@ -69,14 +77,14 @@ namespace ConsoleClient
 
         private void PrintOptions()
         {
-            Console.WriteLine("=====================================================================");
-            Console.WriteLine("Opções");
+            ColoredConsole.WriteWhite("=====================================================================");
+            ColoredConsole.WriteWhite("Opções");
             foreach (var item in Policies)
             {
-                Console.WriteLine($" {item.Key} - {item.Value.PolicyName}");
+                ColoredConsole.WriteWhite($" {item.Key} - {item.Value.PolicyName}");
             }
             Console.WriteLine();
-            Console.WriteLine("Escolha: ");
+            ColoredConsole.WriteWhite("Escolha: ");
         }
     }
 }

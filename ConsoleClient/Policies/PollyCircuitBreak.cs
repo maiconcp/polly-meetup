@@ -9,7 +9,7 @@ namespace ConsoleClient.Policies
 {
     public class PollyCircuitBreak
     {
-        public CircuitBreakerPolicy CircuitBreakerPolicy => Policy
+        public readonly CircuitBreakerPolicy CircuitBreakerPolicy = Policy
             .Handle<Exception>()
             .CircuitBreaker(2, TimeSpan.FromSeconds(10),
             onBreak: (exception, timespan) =>
@@ -26,10 +26,9 @@ namespace ConsoleClient.Policies
             });
 
 
-
         public void CircuitBreak()
         {
-            Console.WriteLine("> Policy: CircuitBreak and Break the circuit after 2 consecutive exceptions");
+            Console.WriteLine("> Policy: CircuitBreak: Break (10s) the circuit after 2 consecutive exceptions");
 
             string option = string.Empty;
             do

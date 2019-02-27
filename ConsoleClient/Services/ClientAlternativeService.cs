@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleClient.Services
 {
-    public class ClientService
+    public class ClientAlternativeService
     {
         private HttpClient _client = new HttpClient();
 
-        public ClientService()
+        public ClientAlternativeService()
         {
             _client.BaseAddress = new Uri("http://localhost:5000/");
             _client.DefaultRequestHeaders.Accept.Clear();
@@ -22,21 +22,9 @@ namespace ConsoleClient.Services
         {
             try
             {
-                return _client.GetStringAsync("api/business").Result;
+                return _client.GetStringAsync("api/AlternativeBusiness").Result;
             }
             catch(AggregateException ex)
-            {
-                throw ex.InnerException;
-            }
-        }
-
-        public async Task<string> GetSomeThingAsync()
-        {
-            try
-            {
-                return await _client.GetStringAsync("api/business");
-            }
-            catch (AggregateException ex)
             {
                 throw ex.InnerException;
             }

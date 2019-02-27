@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Polly;
 
 namespace ConsoleClient
 {
@@ -7,7 +9,8 @@ namespace ConsoleClient
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("   * . * . * . * . * Polly Client Started * . * . * . * . * ");
+            Console.WriteLine("   * . * . * . * . * Polly Client started * . * . * . * . * ");
+            Console.WriteLine("   * . * . * . * . by Maicon Carlos Pereira * . * . * . * . * ");
 
             // Art from: https://manytools.org/hacker-tools/convert-images-to-ascii-art/
             Console.Write(

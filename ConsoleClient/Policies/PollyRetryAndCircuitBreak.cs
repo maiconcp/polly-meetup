@@ -10,10 +10,10 @@ namespace ConsoleClient.Policies
 {
     public class PollyRetryAndCircuitBreak
     {
-        public void CircuitBreak()
+        public void RetryAndCircuitBreak()
         {
-            Console.WriteLine("> Policy: Retry with 3 attempt and exponential backoff");
-            Console.WriteLine("> Policy: CircuitBreak and Break the circuit after 2 consecutive exceptions");
+            Console.WriteLine("> Policy: Retry with 3 attempt (2s)");
+            Console.WriteLine("> Policy: CircuitBreak: Break (10s) the circuit after 2 consecutive exceptions");
 
             var circuitBreak = new PollyCircuitBreak().CircuitBreakerPolicy;
             var retry = new PollyRetry().WaitAndRetryPolicy;
